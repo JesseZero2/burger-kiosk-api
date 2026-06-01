@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\CartController;
 use App\Http\Controllers\Api\PaymentController;
 use App\Http\Middleware\ApiKeyMiddleware;
 
+Route::middleware(ApiKeyMiddleware::class)->group(function () {
 // ─────────────────────────────────────────────
 // ORDERS  (Jesse)
 // ─────────────────────────────────────────────
@@ -34,9 +35,8 @@ Route::get('/payments/order/{order_id}',   [PaymentController::class, 'byOrder']
 Route::post('/payments/{payment_id}/void', [PaymentController::class, 'void']);
 
 // ─────────────────────────────────────────────
-// MENU ITEMS  (Jericho) — protected by API key
+// MENU ITEMS  (Jericho)    
 // ─────────────────────────────────────────────
-Route::middleware(ApiKeyMiddleware::class)->group(function () {
     Route::get('/menu-items',         [MenuItemController::class, 'index']);
     Route::get('/menu-items/{id}',    [MenuItemController::class, 'show']);
     Route::post('/menu-items',        [MenuItemController::class, 'store']);

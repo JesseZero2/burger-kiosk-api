@@ -8,13 +8,14 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ApiKeyMiddleware
 {
+
     public function handle(Request $request, Closure $next): Response
     {
+        $validKey = env('API_KEY');
         $apiKey = $request->header('apikey');
 
         $bearerToken = $request->bearerToken();
 
-        $validKey = 'sb_publishable_vHfCgfAO2Kff2kDBqotgLg_nUUGRAlS';
 
         if ($apiKey !== $validKey && $bearerToken !== $validKey) {
 
