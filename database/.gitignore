@@ -1,1 +1,11 @@
+<<<<<<< HEAD
 *.sqlite*
+=======
+/vendor
+/node_modules
+/.env
+/public/storage
+/storage/*.key
+/.idea
+/.vscode
+>>>>>>> master
