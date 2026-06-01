@@ -63,4 +63,18 @@ class MenuItemController extends Controller
             'message' => 'Deleted successfully'
         ]);
     }
+
+    //this will find the id of the menu
+       public function show($id)
+    {
+        $menuItem = MenuItem::find($id);
+
+        if (!$menuItem) {
+            return response()->json([
+                'message' => 'Menu item not found'
+            ], 404);
+        }
+
+        return response()->json($menuItem);
+    }
 }
