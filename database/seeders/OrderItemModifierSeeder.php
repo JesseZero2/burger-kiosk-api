@@ -26,7 +26,9 @@ class OrderItemModifierSeeder extends Seeder
         $bbqSauce    = DB::table('modifiers')->where('name', 'BBQ Sauce')->value('modifier_id');
         $spicySauce  = DB::table('modifiers')->where('name', 'Spicy Sauce')->value('modifier_id');
 
-        DB::table('order_item_modifiers')->insertOrIgnore([
+        DB::table('order_item_modifiers')->delete();
+
+        DB::table('order_item_modifiers')->insert([
             // Whopper in order 1 - extra cheese, no onions
             [
                 'order_item_id' => $whopperItem,

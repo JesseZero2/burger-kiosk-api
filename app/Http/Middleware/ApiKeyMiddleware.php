@@ -11,10 +11,10 @@ class ApiKeyMiddleware
 
     public function handle(Request $request, Closure $next): Response
     {
-        $validKey = env('API_KEY');
         $apiKey = $request->header('apikey');
-
+        
         $bearerToken = $request->bearerToken();
+        $validKey = env('API_KEY');
 
 
         if ($apiKey !== $validKey && $bearerToken !== $validKey) {

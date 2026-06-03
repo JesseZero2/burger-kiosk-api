@@ -37,7 +37,10 @@ class MenuItemModifierSeeder extends Seeder
         $spicySauce   = DB::table('modifiers')->where('name', 'Spicy Sauce')->value('modifier_id');
         $bbqSauce     = DB::table('modifiers')->where('name', 'BBQ Sauce')->value('modifier_id');
         $ranchSauce   = DB::table('modifiers')->where('name', 'Ranch Sauce')->value('modifier_id');
-        DB::table('menu_item_modifiers')->insertOrIgnore([
+
+        DB::table('menu_item_modifiers')->delete();
+
+        DB::table('menu_item_modifiers')->insert([
             // Whopper modifiers
             ['menu_item_id' => $whopper, 'modifier_id' => $extraPatty,   'is_required' => false, 'max_quantity' => 2],
             ['menu_item_id' => $whopper, 'modifier_id' => $extraCheese,  'is_required' => false, 'max_quantity' => 2],

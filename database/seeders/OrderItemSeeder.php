@@ -12,6 +12,8 @@ class OrderItemSeeder extends Seeder
     {
         $now = Carbon::now();
 
+        DB::table('order_items')->delete();
+
         $order1 = DB::table('orders')->where('order_number', 'BK-20260601-001')->value('id');
         $order2 = DB::table('orders')->where('order_number', 'BK-20260601-002')->value('id');
         $order3 = DB::table('orders')->where('order_number', 'BK-20260601-003')->value('id');
@@ -23,7 +25,7 @@ class OrderItemSeeder extends Seeder
         $nuggets6     = DB::table('menu_items')->where('name', 'BK Nuggets (6pcs)')->value('id');
         $chickenSand  = DB::table('menu_items')->where('name', 'Chicken Sandwich')->value('id');
 
-        DB::table('order_items')->insertOrIgnore([
+        DB::table('order_items')->insert([
             // Order 1 - just a Whopper
             [
                 'order_id'     => $order1,

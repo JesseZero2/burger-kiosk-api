@@ -1,6 +1,4 @@
-<<<<<<< HEAD
 *.sqlite*
-=======
 /vendor
 /node_modules
 /.env
@@ -8,4 +6,3 @@
 /storage/*.key
 /.idea
 /.vscode
->>>>>>> master

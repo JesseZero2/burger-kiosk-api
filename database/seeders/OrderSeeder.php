@@ -12,7 +12,9 @@ class OrderSeeder extends Seeder
     {
         $now = Carbon::now();
 
-        DB::table('orders')->insertOrIgnore([
+        DB::table('orders')->delete();
+
+        DB::table('orders')->insert([
             [
                 'order_number' => 'BK-20260601-001',
                 'queue_number' => 1,

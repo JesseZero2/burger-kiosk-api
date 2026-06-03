@@ -12,7 +12,9 @@ class ModifierSeeder extends Seeder
     {
         $now = Carbon::now();
 
-        DB::table('modifiers')->insertOrIgnore([
+        DB::table('modifiers')->delete();
+
+        DB::table('modifiers')->insert([
             ['name' => 'Extra Patty',      'price_delta' => 59.00,  'is_active' => true, 'created_at' => $now, 'updated_at' => $now],
             ['name' => 'Extra Cheese',     'price_delta' => 20.00,  'is_active' => true, 'created_at' => $now, 'updated_at' => $now],
             ['name' => 'Extra Bacon',      'price_delta' => 39.00,  'is_active' => true, 'created_at' => $now, 'updated_at' => $now],

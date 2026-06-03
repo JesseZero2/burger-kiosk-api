@@ -15,7 +15,9 @@ class PaymentSeeder extends Seeder
         $order1 = DB::table('orders')->where('order_number', 'BK-20260601-001')->value('id');
         $order2 = DB::table('orders')->where('order_number', 'BK-20260601-002')->value('id');
 
-        DB::table('payments')->insertOrIgnore([
+        DB::table('payments')->delete();
+
+        DB::table('payments')->insert([
             [
                 'order_id'        => $order1,
                 'payment_method'  => 'cash',
