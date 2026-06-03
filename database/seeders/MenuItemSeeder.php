@@ -7,159 +7,106 @@ use App\Models\MenuItem;
 
 class MenuItemSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
-        MenuItem::firstOrCreate([
-            'name' => 'Whopper'
-        ],[
-            'category' => 'whopper',
-            'price' => 189.00,
-            'description' => 'Flame grilled beef burger',
-            'image_url' => 'https://example.com/whopper.jpg',
-            'available' => true
-        ]);
+        $products = [
+            [
+                'name' => 'Whopper',
+                'category' => 'whopper',
+                'price' => 249,
+                'image_url' => 'assets/products/whopper/whopper.webp',
+            ],
+            [
+                'name' => 'Whopper Jr.',
+                'category' => 'whopper',
+                'price' => 149,
+                'image_url' => 'assets/products/whopper/whopper_jr.webp',
+            ],
+            [
+                'name' => '4-Cheese Whopper',
+                'category' => 'whopper',
+                'price' => 269,
+                'image_url' => 'assets/products/whopper/4_cheese_whopper.webp',
+            ],
+            [
+                'name' => '4-Cheese Whopper Jr.',
+                'category' => 'whopper',
+                'price' => 169,
+                'image_url' => 'assets/products/whopper/4_cheese_whopper_jr.webp',
+            ],
 
-        MenuItem::firstOrCreate([
-            'name' => 'Cheeseburger'
-        ],[
-            'category' => 'flame_grilled_cheeseburger',
-            'price' => 99.00,
-            'description' => 'Classic cheeseburger',
-            'image_url' => 'https://example.com/cheeseburger.jpg',
-            'available' => true
-        ]);
+            [
+                'name' => 'Angriest Whopper',
+                'category' => 'featured',
+                'price' => 279,
+                'image_url' => 'assets/products/featured/angriest_whopper.webp',
+            ],
+            [
+                'name' => 'Angriest 4-Cheese Whopper',
+                'category' => 'featured',
+                'price' => 299,
+                'image_url' => 'assets/products/featured/angriest_4-cheese_whopper.webp',
+            ],
+            [
+                'name' => 'Angriest X-tra Long Chicken',
+                'category' => 'featured',
+                'price' => 229,
+                'image_url' => 'assets/products/featured/angriest_x-tra_long_chicken.webp',
+            ],
+            [
+                'name' => 'Large Iced Matcha Espresso',
+                'category' => 'featured',
+                'price' => 129,
+                'image_url' => 'assets/products/featured/large_iced_matcha_espresso.webp',
+            ],
 
-        MenuItem::firstOrCreate([
-            'name' => 'Double Whopper'
-        ],[
-            'category' => 'whopper',
-            'price' => 229.00,
-            'description' => 'Extra beef patty burger',
-            'image_url' => 'https://example.com/double-whopper.jpg',
-            'available' => true
-        ]);
+            [
+                'name' => 'Plant-Based Whopper',
+                'category' => 'plant_based_whopper',
+                'price' => 259,
+                'image_url' => 'assets/products/plant_based_whopper/plant_based_whopper.webp',
+            ],
+            [
+                'name' => 'Plant-Based Whopper Jr.',
+                'category' => 'plant_based_whopper',
+                'price' => 159,
+                'image_url' => 'assets/products/plant_based_whopper/plant_based_whopper_jr.webp',
+            ],
 
-        MenuItem::firstOrCreate([
-            'name' => 'Whopper with Cheese'
-        ],[
-            'category' => 'whopper',
-            'price' => 199.00,
-            'description' => 'Whopper topped with cheese',
-            'image_url' => 'https://example.com/whopper-cheese.jpg',
-            'available' => true
-        ]);
+            [
+                'name' => 'Chicken King',
+                'category' => 'chicken_king',
+                'price' => 189,
+                'image_url' => 'assets/products/chicken_king/chicken_king.webp',
+            ],
+            [
+                'name' => 'Spicy Chicken King',
+                'category' => 'chicken_king',
+                'price' => 199,
+                'image_url' => 'assets/products/chicken_king/spicy_chicken_king.webp',
+            ],
+            [
+                'name' => 'BLT Spicy Chicken King',
+                'category' => 'chicken_king',
+                'price' => 219,
+                'image_url' => 'assets/products/chicken_king/blt_spicy_chicken_king.webp',
+            ],
 
-        MenuItem::firstOrCreate([
-            'name' => 'Burger King Stacker'
-        ],[
-            'category' => 'king_specials',
-            'price' => 259.00,
-            'description' => 'Stacked burger with multiple patties',
-            'image_url' => 'https://example.com/stacker.jpg',
-            'available' => true
-        ]);
+            // Continue adding the remaining products
+            // from your Flutter mockProducts list...
+        ];
 
-        MenuItem::firstOrCreate([
-            'name' => 'Double Cheeseburger'
-        ],[
-            'category' => 'flame_grilled_cheeseburger',
-            'price' => 129.00,
-            'description' => 'Double patty cheeseburger',
-            'image_url' => 'https://example.com/double-cheeseburger.jpg',
-            'available' => true
-        ]);
-
-        MenuItem::firstOrCreate([
-            'name' => 'Chicken Sandwich'
-        ],[
-            'category' => 'chicken_king',
-            'price' => 149.00,
-            'description' => 'Crispy chicken sandwich',
-            'image_url' => 'https://example.com/chicken-sandwich.jpg',
-            'available' => true
-        ]);
-
-        MenuItem::firstOrCreate([
-            'name' => 'Spicy Chicken Sandwich'
-        ],[
-            'category' => 'chicken_king',
-            'price' => 159.00,
-            'description' => 'Spicy crispy chicken sandwich',
-            'image_url' => 'https://example.com/spicy-chicken.jpg',
-            'available' => true
-        ]);
-
-        MenuItem::firstOrCreate([
-            'name' => 'Whopper Meal'
-        ],[
-            'category' => 'group_meals',
-            'price' => 329.00,
-            'description' => 'Whopper with fries and drink meal',
-            'image_url' => 'https://example.com/whopper-meal.jpg',
-            'available' => true
-        ]);
-
-        MenuItem::firstOrCreate([
-            'name' => 'BK Nuggets (6pcs)'
-        ],[
-            'category' => 'ultimate_sidekings',
-            'price' => 99.00,
-            'description' => '6-piece chicken nuggets',
-            'image_url' => 'https://example.com/nuggets-6.jpg',
-            'available' => true
-        ]);
-
-        MenuItem::firstOrCreate([
-            'name' => 'BK Nuggets (12pcs)'
-        ],[
-            'category' => 'ultimate_sidekings',
-            'price' => 149.00,
-            'description' => '12-piece chicken nuggets',
-            'image_url' => 'https://example.com/nuggets-12.jpg',
-            'available' => true
-        ]);
-
-        MenuItem::firstOrCreate([
-            'name' => 'Regular Fries'
-        ],[
-            'category' => 'ultimate_sidekings',
-            'price' => 69.00,
-            'description' => 'Regular fries',
-            'image_url' => 'https://example.com/regular-fries.jpg',
-            'available' => true
-        ]);
-
-        MenuItem::firstOrCreate([
-            'name' => 'Coke Regular'
-        ],[
-            'category' => 'drinks',
-            'price' => 59.00,
-            'description' => 'Regular Coke drink',
-            'image_url' => 'https://example.com/coke-regular.jpg',
-            'available' => true
-        ]);
-
-        MenuItem::firstOrCreate([
-            'name' => 'French Fries'
-        ],[
-            'category' => 'ultimate_sidekings',
-            'price' => 79.00,
-            'description' => 'Crispy golden fries',
-            'image_url' => 'https://example.com/fries.jpg',
-            'available' => true
-        ]);
-
-        MenuItem::firstOrCreate([
-            'name' => 'Coke'
-        ],[
-            'category' => 'drinks',
-            'price' => 59.00,
-            'description' => 'Refreshing soda drink',
-            'image_url' => 'https://example.com/coke.jpg',
-            'available' => true
-        ]);
+        foreach ($products as $product) {
+            MenuItem::updateOrCreate(
+                ['name' => $product['name']],
+                [
+                    'category' => $product['category'],
+                    'price' => $product['price'],
+                    'description' => $product['name'],
+                    'image_url' => $product['image_url'],
+                    'available' => true,
+                ]
+            );
+        }
     }
 }
