@@ -4,21 +4,15 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Models\MenuItem;
 
 class MenuItemController extends Controller
 {
-    /**
-     * Return all available menu items.
-     * Kiosk only shows items where available = true.
-     * Admin can pass ?all=1 to get everything including hidden items.
-     */
     public function index(Request $request)
     {
         $query = MenuItem::query();
 
-        // Kiosk: show only available items
-        // Admin: pass ?all=1 to see all items
         if (!$request->boolean('all')) {
             $query->where('available', true);
         }
@@ -27,31 +21,47 @@ class MenuItemController extends Controller
 
         return response()->json([
             'success' => true,
-            'data'    => $items,
+            'data' => $items,
         ]);
     }
 
     public function store(Request $request)
     {
-        $request->validate([
-            'name'     => 'required|string|max:255',
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
             'category' => 'required|string|max:255',
-            'price'    => 'required|numeric|min:0',
+            'price' => 'required|numeric|min:0',
+            'description' => 'nullable|string',
+            'available' => 'nullable',
+            'is_available' => 'nullable',
+            'image_url' => 'nullable|string',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:4096',
         ]);
 
+        $imageUrl = $request->image_url;
+
+        if ($request->hasFile('image')) {
+            $path = $request->file('image')->store('menu-items', 'public');
+            $imageUrl = url(Storage::url($path));
+        }
+
+        $available = $request->has('available')
+            ? $request->boolean('available')
+            : $request->boolean('is_available', true);
+
         $item = MenuItem::create([
-            'name'        => $request->name,
-            'category'    => $request->category,
-            'price'       => $request->price,
+            'name' => $validated['name'],
+            'category' => $validated['category'],
+            'price' => $validated['price'],
             'description' => $request->description,
-            'image_url'   => $request->image_url,
-            'available'   => $request->boolean('available', true),
+            'image_url' => $imageUrl,
+            'available' => $available,
         ]);
 
         return response()->json([
             'success' => true,
             'message' => 'Menu item created successfully.',
-            'data'    => $item,
+            'data' => $item,
         ], 201);
     }
 
@@ -68,7 +78,7 @@ class MenuItemController extends Controller
 
         return response()->json([
             'success' => true,
-            'data'    => $item,
+            'data' => $item,
         ]);
     }
 
@@ -76,21 +86,42 @@ class MenuItemController extends Controller
     {
         $item = MenuItem::findOrFail($id);
 
-        $item->update([
-            'name'        => $request->name        ?? $item->name,
-            'category'    => $request->category    ?? $item->category,
-            'price'       => $request->price       ?? $item->price,
-            'description' => $request->description ?? $item->description,
-            'image_url'   => $request->image_url   ?? $item->image_url,
-            'available'   => $request->has('available')
-                                ? $request->boolean('available')
-                                : $item->available,
+        $request->validate([
+            'name' => 'sometimes|required|string|max:255',
+            'category' => 'sometimes|required|string|max:255',
+            'price' => 'sometimes|required|numeric|min:0',
+            'description' => 'nullable|string',
+            'available' => 'nullable',
+            'is_available' => 'nullable',
+            'image_url' => 'nullable|string',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:4096',
         ]);
+
+        $data = $request->only([
+            'name',
+            'category',
+            'price',
+            'description',
+            'image_url',
+        ]);
+
+        if ($request->has('available')) {
+            $data['available'] = $request->boolean('available');
+        } elseif ($request->has('is_available')) {
+            $data['available'] = $request->boolean('is_available');
+        }
+
+        if ($request->hasFile('image')) {
+            $path = $request->file('image')->store('menu-items', 'public');
+            $data['image_url'] = url(Storage::url($path));
+        }
+
+        $item->update($data);
 
         return response()->json([
             'success' => true,
             'message' => 'Menu item updated successfully.',
-            'data'    => $item,
+            'data' => $item,
         ]);
     }
 
